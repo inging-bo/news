@@ -15,17 +15,45 @@
 </head>
 <body>
   <div class="box">
-    <input type="button" value="+" id="plus"></input>
-    <label for="plus"></label>
-    <button type="reset">reset</button>
+    <input type="button" value="+" id="plusbtn"></input>
+    <label id="text" for="plus"></label>
+    <button id='reset'type="reset">reset</button>
+    <button id="remove" type="remove">remove</button>
+
   </div>
 
   <script>
-    let plusbtn = document.querySelector('.button');
-    plusbtn.addEventListener('click', () => {
-      let plus = document.querySelector('.plus');
-      plus.textContent = 1;
+    let plusbtn = document.getElementById('plusbtn');
+    let text = document.getElementById('text');
+    let reset = document.getElementById('reset');
+    let remove = document.getElementById('remove');
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      if(localStorage.getItem('click-count') == null) {
+        localStorage.setItem('click-count', text.textContent)
+      } else {
+        text.textContent = localStorage.getItem('click-count')
+      }
     })
-  </script>
+    
+    text.textContent = 0
+
+    plusbtn.addEventListener('click', () => {
+      text.textContent = localStorage.getItem('click-count')
+      text.textContent++
+      localStorage.setItem('click-count', text.textContent)
+    })
+    
+    reset.addEventListener('click', () => {
+      text.textContent = 0
+      i = text.textContent
+      localStorage.setItem('click-count', text.textContent)
+    })
+    remove.addEventListener('click', () => {
+      localStorage.removeItem('click-count')
+    })
+
+
+    </script>
 </body>
 </html>
